@@ -1,2 +1,1 @@
-nome = ('marlon')
-print (nome)
+....
