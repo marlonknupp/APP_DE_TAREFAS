@@ -11,6 +11,10 @@ janela.geometry("500x600")
 
 fonte_cabecalho = font.Font(family="Garamond", size=24, weight="bold")
 rotulo_cabecalho =  tk.Label(janela, text="Meu App de tarefas", font=fonte_cabecalho, bg="#F0f0f0", fg="#333").pack(pady=20)
+
+frame = tk.Frame(janela,bg="#F0F0F0").pack(pady=10)
+
+entrada_tarefa = tk.Entry(frame,font=("Garamond", 14), relief=tk.FLAT, bg = "white", fg="grey", width)
+
 janela.mainloop()
 
-#######3
