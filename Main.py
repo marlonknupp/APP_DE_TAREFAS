@@ -38,4 +38,5 @@ canvas.create_window((0, 0), window=canvas_interior, anchor="nw")
 canvas_interior.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
 
 janela.mainloop()
+#####
 
