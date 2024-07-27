@@ -4,6 +4,7 @@ from tkinter import PhotoImage
 
 
 # Criando janela 
+
 janela = tk.Tk()
 janela.title("Meu app de tarefas")
 janela.configure(bg="#F0F0F0")
@@ -19,5 +20,22 @@ entrada_tarefa.pack(side=tk.LEFT,padx=10)
 
 botao_adicionar = tk.Button(frame, text="adicionar tarefa", bg="#4CAF50", fg="white", height=1, width=15,font=("Roboto", 11), relief=tk.FLAT)
 botao_adicionar.pack(side=tk.LEFT, padx =10)
+
+# criar um frame para a lista de tarefas com rolagem
+
+frame_lista_tarefas = tk.Frame(janela,bg="white")
+frame_lista_tarefas.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+canvas = tk.Canvas(frame_lista_tarefas, bg = "white")
+canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+scrollbar = ttk.Scrollbar(frame_lista_tarefas, orient= "vertical", command=canvas.yview)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+canvas.configure(yscrollcommand=scrollbar.set)
+canvas_interior = tk.Frame(canvas, bg= "white")
+canvas.create_window((0, 0), window=canvas_interior, anchor="nw")
+canvas_interior.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+
 janela.mainloop()
 
