@@ -27,17 +27,32 @@ def adicionar_tarefa():
     else:
        messagebox.showwarning("Entrada inválida", "Por favor, insira ma tarefa")
 
-def adicionar_item_tarefa(entrada):
-    frame_tarefa = tk.frame(canvas_interior, bg="white, bd=1, relief=tk.SOLID")
+def adicionar_item_tarefa(tarefa):
+    frame_tarefa = tk.frame(canvas_interior, bg="white", bd=1, relief=tk.SOLID)
   
     label_tarefa = tk.Label(frame_tarefa, text=tarefa, font=("Garamond", 16), bg= "white", width=25, height=2, anchor="w")
     label_tarefa.pack(side=tk.LEFT, fill=tk.X, padx=10, pady=5)
 
-    botao_editar = tk.Button(frame_tarefa, image=icon_editar,)
+botao_editar = tk.Button(frame_tarefa, image=icon_editar, command= lambda f=frame_tarefa, l=label_tarefa: preparar_edicao(f, l), bg= "white", relief=tk.FLAT)
+botao_editar.pack(side=tk.RIGHT, padx=5)
+
+botao_deletar = tk.Button(frame_tarefa, image=icon_deletar, command=lambda f=frame_tarefa: deletar_tarefa(f), bg= "white", relief=tk.FLAT)
+botao_deletar.pack(side=tk.RIGHT, padx=5)
+
+frame_tarefa.pack(fill=tk.X, padx=5, pady=5)
+
+checkbutton = ttk.Checkbutton(frame_tarefa, command=lambda label=label_tarefa: alternar_sublinhado(label))
+checkbutton.pack(side=tk.RIGHT, padx=5)
+
+canvas_interior.update_idletasks()
+canvas.config(scrollregion=canvas.bbox("all"))
 
 
-icon_editar = PhotoImage(file="edit.png". subsample(3, 3))
-icon_deletar = PhotoImage(file="delete.png". subsample(3, 3))
+icon_editar = PhotoImage(file="edit.png"). subsample(3, 3)
+icon_deletar = PhotoImage(file="delete.png"). subsample(3, 3)
+
+
+
 
 fonte_cabecalho = font.Font(family="Garamond", size=24, weight="bold")
 rotulo_cabecalho =  tk.Label(janela, text="Meu App de tarefas", font=fonte_cabecalho, bg="#F0f0f0", fg="#333").pack(pady=20)
@@ -49,7 +64,7 @@ frame.pack(pady=10)
 entrada_tarefa = tk.Entry(frame,font=("Garamond", 14), relief=tk.FLAT, bg="white", fg="grey", width=30)
 entrada_tarefa.pack(side=tk.LEFT,padx=10)
 
-botao_adicionar = tk.Button(frame, text="adicionar tarefa", bg="#4CAF50", fg="white", height=1, width=15,font=("Roboto", 11), relief=tk.FLAT)
+botao_adicionar = tk.Button(frame, command= adicionar_tarefa, text="adicionar tarefa", bg="#4CAF50", fg="white", height=1, width=15,font=("Roboto", 11), relief=tk.FLAT)
 botao_adicionar.pack(side=tk.LEFT, padx =10)
 
 # criar um frame para a lista de tarefas com rolagem
