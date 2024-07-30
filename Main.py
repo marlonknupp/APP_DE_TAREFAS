@@ -47,42 +47,30 @@ checkbutton.pack(side=tk.RIGHT, padx=5)
 canvas_interior.update_idletasks()
 canvas.config(scrollregion=canvas.bbox("all"))
 
-
-icon_editar = PhotoImage(file="edit.png"). subsample(3, 3)
-icon_deletar = PhotoImage(file="delete.png"). subsample(3, 3)
-
-
-
-
-fonte_cabecalho = font.Font(family="Garamond", size=24, weight="bold")
-rotulo_cabecalho =  tk.Label(janela, text="Meu App de tarefas", font=fonte_cabecalho, bg="#F0f0f0", fg="#333").pack(pady=20)
+def preparar_edicao(frame_tarefa, label_tarefa):
+    global frame_em_edicao
+    frame_em_edicao = frame_tarefa
+    entrada_tarefa.delete(0, tk.END)
+    entrada_tarefa.insert(0,label_tarefa.cget("text"))
 
 
-frame = tk.Frame(janela,bg="#F0F0F0")
-frame.pack(pady=10)
 
-entrada_tarefa = tk.Entry(frame,font=("Garamond", 14), relief=tk.FLAT, bg="white", fg="grey", width=30)
-entrada_tarefa.pack(side=tk.LEFT,padx=10)
+def atualizar_tarefa(nova_tarefa):
+    global frame_em_edicao
+    for widget in frame_em_edicao.winfo_children():
+        if isinstance(widget, tk.label):
+            widget.config(text=nova_tarefa)
 
-botao_adicionar = tk.Button(frame, command= adicionar_tarefa, text="adicionar tarefa", bg="#4CAF50", fg="white", height=1, width=15,font=("Roboto", 11), relief=tk.FLAT)
-botao_adicionar.pack(side=tk.LEFT, padx =10)
+def deletar_tarefa(frame_tarefa):
+    frame_tarefa.destroy()
+    canvas.interior.update_idletasks()
+    canvas.config(scrollregion=canvas.bbox("all"))
 
-# criar um frame para a lista de tarefas com rolagem
-
-frame_lista_tarefas = tk.Frame(janela,bg="white")
-frame_lista_tarefas.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-
-canvas = tk.Canvas(frame_lista_tarefas, bg = "white")
-canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
-scrollbar = ttk.Scrollbar(frame_lista_tarefas, orient= "vertical", command=canvas.yview)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-canvas.configure(yscrollcommand=scrollbar.set)
-canvas_interior = tk.Frame(canvas, bg= "white")
-canvas.create_window((0, 0), window=canvas_interior, anchor="nw")
-canvas_interior.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
-
-janela.mainloop()
-#####
+def alternar_sublinhado(lavel):
+    fonte_atual = label.cget("font")
+    if "overstrike"in font_atual:
+     nova_fonte = fonte_atual.replace("overstrike","")
+    else:
+     nova_fonte = fonte_atual + " overstrike "
+    label.config(font=nova_fonte)
 
