@@ -12,7 +12,8 @@ janela.geometry("500x600")
 
 frame_em_edicao = None
 
-# funçao adicionar tarefa
+# funçao adicionar tarefaa
+
 def adicionar_tarefa(): 
     global frame_em_edicao
 
