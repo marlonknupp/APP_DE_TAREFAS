@@ -74,15 +74,16 @@ def alternar_sublinhado(label):
         nova_fonte = fonte_atual.replace("overstrike","")
     else:
         nova_fonte = fonte_atual + " overstrike "
-        label.config(font=nova_fonte)
+    label.config(font=nova_fonte)
 
 
+ 
 icon_editar = PhotoImage(file="edit.png").subsample(3, 3)
 icon_deletar = PhotoImage(file="delete.png").subsample(3, 3)
 
 
 fonte_cabecalho = font.Font(family="Garamond",size=24, weight="bold")
-rotulo_cabecalho = tk.Label(janela, text= "Meu app de tarefas" , font=fonte_cabecalho, bg="#F0F0F0", fg="#333".pack(pady=20))
+rotulo_cabecalho = tk.Label(janela, text= "Meu app de tarefas" , font=fonte_cabecalho, bg="#F0F0F0", fg="#333").pack(pady=20)
 
 frame= tk.Frame(janela, bg="#F0F0F0")
 frame.pack(pady=10)
@@ -90,7 +91,7 @@ frame.pack(pady=10)
 entrada_tarefa = tk.Entry(frame, font=("Garamond",14), relief = tk.FLAT, bg ="white", fg="grey", width=30)
 entrada_tarefa.pack(side=tk.LEFT, padx=10)
 
-botao_adicionar = tk.Button(frame, command=adicionar_tarefa, text="Adicionar_tarefa" , bg="4CAF50",fg="white", heigth=1, width=15,font=("roboto",11), relief=tk.FLAT)  
+botao_adicionar = tk.Button(frame, command=adicionar_tarefa, text="Adicionar_tarefa" , bg="#4CAF50", fg="white", height=1, width=15,font=("Roboto",11), relief=tk.FLAT)  
 botao_adicionar.pack(side=tk.LEFT, padx=10)
 
 # Criando frame para lista de tarefas
@@ -104,8 +105,8 @@ canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 scrollbar = ttk.Scrollbar(frame_lista_tarefas, orient="vertical", command=canvas.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-canvas.configure(yscrollcommand=scroollbar.set)
+canvas.configure(yscrollcommand=scrollbar.set)
 canvas_interior = tk.Frame(canvas, bg="white")
 canvas.create_window((0, 0), window=canvas_interior, anchor="nw")
-canvas_interior.bing("<configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+canvas_interior.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
 
