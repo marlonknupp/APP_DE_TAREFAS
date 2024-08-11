@@ -4,7 +4,7 @@ from tkinter import PhotoImage
 
 # Criando janela 
 janela = tk.Tk()
-janela.title("Meu app de tarefas")
+janela.title(" App de tarefas")
 janela.configure(bg="#F0F0F0")
 janela.geometry("500x600")
 
